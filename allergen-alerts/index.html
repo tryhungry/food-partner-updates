@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>HUNGRY Allergen Alerts for Food Partners</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Tokens and layout match tryhungry.github.io/group-order-onboarding */
+  :root {
+    --orange: #fe5f52;
+    --magenta: #ee356c;
+    --teal: rgb(10, 183, 131);
+    --teal-dark: rgb(7, 140, 100);
+    --navy: rgb(37, 43, 50);
+    --grey-txt: rgb(129, 145, 162);
+    --border: #e0e0e0;
+    --page-bg: #f5f5f5;
+    --white: #ffffff;
+    --gradient: linear-gradient(90deg, #fe5f52 0%, #ee356c 100%);
+    --font: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    --card-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--navy);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+  }
+  nav {
+    background: var(--white);
+    box-shadow: rgba(0,0,0,0.1) 0px 4px 12px 0px;
+    height: 56px;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .nav-inner {
+    max-width: 1180px; margin: 0 auto; height: 100%;
+    padding: 0 16px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { display: flex; align-items: center; }
+  .logo img { display: block; height: 22px; width: auto; }
+  .nav-tag { font-size: 13px; color: var(--grey-txt); font-weight: 500; }
+
+  .hero {
+    background: var(--navy);
+    color: #fff;
+    padding: 44px 16px 120px;
+    position: relative;
+  }
+  .hero::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+    background: var(--gradient);
+  }
+  .hero-inner { max-width: 1180px; margin: 0 auto; }
+  .eyebrow {
+    display: inline-block;
+    background: var(--gradient); color: #fff;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 20px;
+  }
+  h1 { font-size: clamp(28px, 4.5vw, 42px); line-height: 1.2; margin: 16px 0 10px; font-weight: 700; }
+  .hero p { margin: 0; max-width: 640px; color: rgba(255,255,255,0.78); font-size: 16px; line-height: 1.6; }
+
+  main {
+    max-width: 1180px; margin: -88px auto 0; padding: 0 16px 56px;
+    display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 24px;
+    position: relative;
+  }
+  .card {
+    background: var(--white); border-radius: 12px; box-shadow: var(--card-shadow);
+  }
+  .player { overflow: hidden; align-self: start; }
+  video { display: block; width: 100%; height: auto; background: #000; aspect-ratio: 16 / 10; }
+  .now-playing {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 18px; border-top: 1px solid var(--border);
+    font-size: 14px; font-weight: 500;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--magenta); flex: none; }
+
+  .side { display: flex; flex-direction: column; gap: 24px; align-self: start; }
+  .chapters { padding: 18px 12px; }
+  .chapters h2 { font-size: 15px; font-weight: 600; margin: 0 8px 2px; }
+  .chapters-sub { margin: 0 8px 12px; font-size: 12.5px; color: var(--grey-txt); }
+  .chapters ol { list-style: none; margin: 0; padding: 0; }
+  .chapters button {
+    width: 100%; display: flex; align-items: center; gap: 12px;
+    background: none; border: 1.5px solid transparent; border-radius: 10px;
+    padding: 9px 10px; cursor: pointer; text-align: left;
+    font-family: inherit; font-size: 13.5px; color: var(--navy);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .chapters button:hover { background: rgba(10,183,131,0.04); border-color: var(--teal); }
+  .chapters button.active { background: rgba(10,183,131,0.07); border-color: var(--teal); font-weight: 600; }
+  .chapters button.done .num { background: var(--teal); color: #fff; }
+  .num {
+    flex: none; width: 26px; height: 26px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: #eef0f3; color: var(--grey-txt); font-size: 12px; font-weight: 600;
+  }
+  .chapters button.active .num { background: var(--gradient); color: #fff; }
+  .ch-title { flex: 1; min-width: 0; }
+  .time { color: var(--grey-txt); font-size: 12px; font-variant-numeric: tabular-nums; }
+
+  .learn { grid-column: 1 / -1; padding: 28px; }
+  .learn h2 { margin: 0 0 18px; font-size: 20px; }
+  .learn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+  .learn-item {
+    border: 1px solid var(--border); border-radius: 12px; padding: 16px;
+  }
+  .learn-item h3 { margin: 0 0 6px; font-size: 14.5px; font-weight: 600; }
+  .learn-item p { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--grey-txt); }
+  .chip {
+    display: inline-block; margin-bottom: 10px;
+    background: rgba(10,183,131,0.10); color: var(--teal-dark);
+    border: 1px solid rgba(10,183,131,0.25); border-radius: 20px;
+    padding: 2px 10px; font-size: 11px; font-weight: 600;
+  }
+  .allergens { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+  .allergens span {
+    border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px;
+    font-size: 12.5px; font-weight: 500;
+  }
+  .allergens-label { margin: 22px 0 0; font-size: 13.5px; font-weight: 600; }
+
+  footer { text-align: center; color: var(--grey-txt); font-size: 13px; padding: 0 16px 40px; line-height: 1.6; }
+
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; margin-top: -72px; }
+    .hero { padding-bottom: 100px; }
+    .learn { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="https://tryhungry.com"><img src="logo.png" alt="HUNGRY"></a>
+    <span class="nav-tag">For Food Partners</span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Allergen Alerts</span>
+    <h1>How Allergen Alerts work</h1>
+    <p>Watch this short video to learn what Allergen Alerts are, how to confirm them, and where you and your kitchen will see them on an order.</p>
+  </div>
+</header>
+
+<main>
+  <section class="card player">
+    <video id="video" controls playsinline preload="metadata" poster="poster.jpg">
+      <source src="walkthrough.mp4" type="video/mp4">
+      <track kind="captions" src="captions.vtt" srclang="en" label="English">
+    </video>
+    <div class="now-playing"><span class="dot"></span><span id="now">What it is</span></div>
+  </section>
+
+  <aside class="side">
+    <section class="card chapters">
+      <h2>Chapters</h2>
+      <p class="chapters-sub">Jump to any step by clicking the chapters.</p>
+      <ol id="chapter-list"></ol>
+    </section>
+  </aside>
+
+  <section class="card learn">
+    <h2>What you'll learn</h2>
+    <div class="learn-grid">
+      <div class="learn-item">
+        <span class="chip">Good to know</span>
+        <h3>What Allergen Alerts are</h3>
+        <p>Group Order diners can save food allergies to their HUNGRY profile. When an order has one, we flag it and ask you to confirm. Orders without alerts work as usual.</p>
+      </div>
+      <div class="learn-item">
+        <span class="chip">Every order with alerts</span>
+        <h3>How to confirm</h3>
+        <p>Use the link in your cutoff email, or go to Allergen Alerts in your Chef Dashboard. Review the flagged items, choose whether you can accommodate them, then click Submit Response.</p>
+      </div>
+      <div class="learn-item">
+        <span class="chip">Respond quickly</span>
+        <h3>Reminders and deadlines</h3>
+        <p>Respond as soon as you get the cutoff email. If we don't hear from you, we'll send a reminder, then a final reminder. After that, our team will contact you.</p>
+      </div>
+      <div class="learn-item">
+        <span class="chip">Share with your kitchen</span>
+        <h3>Where you'll see alerts</h3>
+        <p>Your cutoff email, the Kitchen Prep Doc, labels, the order manifest, your Chef Dashboard and the PDF order summary.</p>
+      </div>
+    </div>
+    <p class="allergens-label">The 13 allergens diners can choose from</p>
+    <div class="allergens">
+      <span>Peanuts</span><span>Tree Nuts</span><span>Milk/Dairy</span><span>Eggs</span><span>Wheat</span><span>Gluten</span><span>Soy</span><span>Fish</span><span>Crustaceans</span><span>Molluscs</span><span>Sesame</span><span>Mustard</span><span>Sulphites</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Questions? Reach out to your Food Partner Manager.<br>
+  Thank you from the HUNGRY Food Partner Team.
+</footer>
+
+<script>
+  // Chapter starts from the recorder's video.chapters.json
+  const chapters = [
+    { title: "What it is", start: 0 },
+    { title: "How to confirm", start: 27 },
+    { title: "Reminders and deadlines", start: 77 },
+    { title: "Where you'll see alerts", start: 90 },
+    { title: "Wrap-up", start: 145 }
+  ];
+  const video = document.getElementById("video");
+  const list = document.getElementById("chapter-list");
+  const now = document.getElementById("now");
+  const fmt = s => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+
+  const buttons = chapters.map((c, i) => {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    const label = i === chapters.length - 1 ? "✓" : i + 1;
+    b.innerHTML = `<span class="num">${label}</span><span class="ch-title"></span><span class="time">${fmt(c.start)}</span>`;
+    b.querySelector(".ch-title").textContent = c.title;
+    b.addEventListener("click", () => { video.currentTime = c.start; video.play(); });
+    li.appendChild(b); list.appendChild(li);
+    return b;
+  });
+
+  let current = -1;
+  function update() {
+    const t = video.currentTime;
+    let idx = 0;
+    chapters.forEach((c, i) => { if (t >= c.start) idx = i; });
+    if (idx === current) return;
+    current = idx;
+    buttons.forEach((b, i) => {
+      b.classList.toggle("active", i === idx);
+      b.classList.toggle("done", i < idx);
+    });
+    now.textContent = chapters[idx].title;
+  }
+  video.addEventListener("timeupdate", update);
+  video.addEventListener("seeked", update);
+  update();
+</script>
+</body>
+</html>
